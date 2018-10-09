@@ -12,6 +12,7 @@ public class PageBase {
 	protected WebDriver driver;
 	public PageBase(WebDriver driver) {
 		PageFactory.initElements(driver, this);
+		this.driver=driver;
 	}	
 	public JavascriptExecutor js;
 	public Select select;
