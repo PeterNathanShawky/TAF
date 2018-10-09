@@ -42,8 +42,9 @@ public class TestBase extends AbstractTestNGCucumberTests{
 		FirefoxOptions dd = new FirefoxOptions();
 		dd.addPreference("browser.download.folderList", 2);
 		dd.addPreference("browser.download.dir", downPath);
-		dd.addPreference("browser.helperApps.neverAsk.saveToDisk", "application/octet-stream");
+		dd.addPreference("browser.helperApps.neverAsk.saveToDisk", "application/pdf"); //it may include many comma separated data types parameters
 		dd.addPreference("browser.download.manager.showWhenStarting", false);
+		dd.addPreference("pdfjs.disabled", true);
 		return dd;
 	}
 	
