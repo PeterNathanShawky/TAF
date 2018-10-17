@@ -15,6 +15,35 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<!-- To compile your code from the Command Line -->
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
+					<configuration>
+						<source>8</source>
+						<target>8</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<!-- To run Your TestNG File using Maven -->
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.1</version>
+					<configuration>
+						<suiteXmlFiles>
+							<!-- The "suiteXmlFile" is parameterized by the the value of "testNGSuite" 
+								tag existing in your Maven Profile -->
+							<suiteXmlFile>${testNGSuite}</suiteXmlFile>
+						</suiteXmlFiles>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 	<dependencies>
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -58,5 +87,25 @@
 			<artifactId>phantomjsdriver</artifactId>
 			<version>1.4.4</version>
 		</dependency>
+		<dependency>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>build-helper-maven-plugin</artifactId>
+			<version>3.0.0</version>
+		</dependency>
 	</dependencies>
+	<profiles>
+		<profile>
+			<id>regression</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>environment</name>
+					<value>regression</value>
+				</property>
+			</activation>
+			<properties>
+				<testNGSuite>testNG.xml</testNGSuite>
+			</properties>
+		</profile>
+	</profiles>
 </project>
